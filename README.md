@@ -78,25 +78,25 @@ Save and exit (Ctrl + X, then Y, then Enter).
     ```
 
 2. Add the following content to the service file:
+```
+[Unit]
+Description=Start Eleven Labs Python Script
+After=network-online.target
+Wants=network-online.target
 
-    ```ini
-    [Unit]
-    Description=Start Eleven Labs Python Script
-    After=network-online.target
-    Wants=network-online.target
+[Service]
+Type=simple
+User=treyden
+WorkingDirectory=/home/treyden/Desktop/labra
+ExecStart=/home/treyden/Desktop/labra/start_script.sh
+Restart=on-failure
 
-    [Service]
-    Type=simple
-    User=pi
-    WorkingDirectory=/home/pi/Desktop/labra
-    ExecStart=/home/pi/Desktop/labra/start_script.sh
-    Restart=on-failure
-    Environment=OPENAI_API_KEY=your_openai_api_key
-    Environment=ELEVENLABS_API_KEY=your_elevenlabs_api_key
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+ExecStartPre=/bin/sleep 10
 
-    [Install]
-    WantedBy=multi-user.target
-    ```
+[Install]
+WantedBy=multi-user.target
+```
 
 3. Save and exit (Ctrl + X, then Y, then Enter).
 
